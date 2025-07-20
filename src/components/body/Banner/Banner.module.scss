@@ -1,35 +1,34 @@
 @import '../../../assets/styles/base';
 
-$primary-blue: #007bff; // A common blue, adjust if needed
+$primary-blue: #007bff;
 $dark-blue: #0056b3;
 $light-gray: #f8f9fa;
 $medium-gray: #e9ecef;
 $dark-gray: #6c757d;
 $text-color: #1c252e;
 $orange-badge: #ffc107;
-$red-flag: #b71d18; // Darker red for prices
+$red-flag: #b71d18;
 $hot-badge-bg: #ffc107;
 $hot-badge-text: #343a40;
 $product-card-bg: #ffffff;
-$product-badge-text: #7a0916; // Dark red/brown for badge text
-$buy-button-bg: #e6f1ff; // Light blue for buy button
-$buy-button-text: #025fca; // Dark blue for buy button text
+$product-badge-text: #7a0916;
+$buy-button-bg: #e6f1ff;
+$buy-button-text: #025fca;
 $carousel-bg-blue: #0056b3; // Dark blue background for carousel section
 $card-shadow: rgba(0, 0, 0, 0.08); // Shadow for product cards
 $badge-bg: #f97316;
 .bannerSection {
     background-color: $carousel-bg-blue; // Blue background for the entire section
     margin: 0px auto;
-    max-width: 1400px; // Match container width from header
-    padding-bottom: 20px; // Padding at the bottom of the blue section
+    max-width: $widthScreen;
+    padding-bottom: 20px;
 }
 
 .heroBanner {
     position: relative;
     width: 100%;
-    height: 250px; // Adjust height as needed
     overflow: hidden;
-    margin-bottom: 20px; // Space between banner and carousel
+    margin-bottom: 20px;
 
     .heroBannerImage {
         object-fit: cover;
@@ -229,6 +228,19 @@ $badge-bg: #f97316;
             background-color: darken($buy-button-bg, 5%);
         }
     }
+}
+.title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    margin: 8px 0;
+    color: #0f172a;
+    height: 3em; // Limit to 2 lines
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .scrollButtonLeft,

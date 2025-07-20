@@ -21,7 +21,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1400px;
+    max-width: $widthScreen;
     margin: 0px auto;
     font-size: 12px;
     font-weight: 400;
@@ -69,7 +69,7 @@ $red-flag: #dc3545;
         align-items: center;
         justify-content: space-between;
         height: 96px; // Approx 24 units * 4px/unit
-        max-width: 1400px; // container mx-auto
+        max-width: $widthScreen; // container mx-auto
         margin-left: auto;
         margin-right: auto;
 
@@ -213,7 +213,7 @@ $red-flag: #dc3545;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            max-width: 1400px;
+            max-width: $widthScreen;
             margin-left: auto;
             margin-right: auto;
         }
@@ -294,7 +294,7 @@ $red-flag: #dc3545;
         padding-bottom: 32px;
 
         .headerBottomContent {
-            max-width: 1400px; // container mx-auto
+            max-width: $widthScreen; // container mx-auto
             margin-left: auto;
             margin-right: auto;
             font-size: 0.875rem; // text-sm

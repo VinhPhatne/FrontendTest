@@ -1,3 +1,5 @@
+@import '../../../assets/styles/base';
+
 .footer {
     background: #ffffff;
     padding: 96px 80px;
@@ -8,7 +10,7 @@
     display: flex;
     justify-content: space-between;
     gap: 30px; // hoặc 20px nếu bạn muốn gần hơn nữa
-    max-width: 1400px;
+    max-width: $widthScreen;
     margin: 0 auto;
     padding-bottom: 30px;
 }

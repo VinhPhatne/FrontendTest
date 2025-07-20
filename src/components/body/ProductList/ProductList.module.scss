@@ -1,4 +1,5 @@
-/* Variables */
+@import '../../../assets/styles/base';
+
 $primary-blue: #0373f3; // A common blue, adjust if needed
 $dark-blue: #1d4ed8;
 $light-gray-bg: #f9fafb;
@@ -20,7 +21,7 @@ $buy-button-text: #025fca;
     gap: 20px;
     padding: 32px 0px;
     background: $light-gray-bg;
-    max-width: 1400px;
+    max-width: $widthScreen;
     margin: 0px auto;
     border-radius: 8px; // Added for overall wrapper
 }

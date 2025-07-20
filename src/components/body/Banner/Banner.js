@@ -123,6 +123,7 @@ export default function Banner() {
                                 />
                                 {product.badge}
                             </div>
+                             <h4 className={styles.title}>{product.name}</h4>
                             <p className={styles.productCurrentPrice}>{product.currentPrice}</p>
                             <div className={styles.priceRow}>
                                 <div className={styles.subRow}>
