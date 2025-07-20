@@ -3,7 +3,6 @@
 .footer {
     background: $defaultBackgroundColor;
     padding: 96px 80px;
-    font-family: Lexend;
 }
 
 .footerMain {
@@ -33,6 +32,7 @@
     font-size: 20px;
     line-height: 24px;
     font-weight: 600;
+    margin-bottom: 50px;
     color: $footer-title-color;
 }
 
