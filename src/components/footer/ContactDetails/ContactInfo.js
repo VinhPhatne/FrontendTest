@@ -1,14 +1,8 @@
 
-import React from 'react';
 import appleStore from '../../../assets/images/appleStore.svg';
 import appStore from '../../../assets/images/appStore.svg';
-import facebook from '../../../assets/images/facebook.svg';
 import flag from '../../../assets/images/flag.svg';
 import footerImage from '../../../assets/images/footerImage.svg';
-import iconGlobal from '../../../assets/images/iconGlobal.svg';
-import linkedin from '../../../assets/images/Linkedin.svg';
-import logoFooter from '../../../assets/images/logo01.svg';
-import twitter from '../../../assets/images/Twitter.svg';
 import styles from './ContactDetails.module.scss';
 function Footer() {
 
