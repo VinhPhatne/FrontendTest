@@ -1,0 +1,157 @@
+/* SPACING */
+$spacing: 4;
+$space-prefixes: (
+    p: padding,
+    pt: padding-top,
+    pr: padding-right,
+    pb: padding-bottom,
+    pl: padding-left,
+    px: (
+        padding-left,
+        padding-right,
+    ),
+    py: (
+        padding-top,
+        padding-bottom,
+    ),
+    m: margin,
+    mt: margin-top,
+    mr: margin-right,
+    mb: margin-bottom,
+    ml: margin-left,
+    mx: (
+        margin-left,
+        margin-right,
+    ),
+    my: (
+        margin-top,
+        margin-bottom,
+    ),
+) !default;
+
+@mixin make-space($prefixes) {
+    @each $attr-short, $attr-long in $prefixes {
+        @for $i from 0 to 15 {
+            .#{$attr-short}-#{$i} {
+                @if (type-of($attr-long) == string) {
+                    #{$attr-long}: #{$spacing * $i}#{'px !important'};
+                } @else {
+                    @each $attr in $attr-long {
+                        #{$attr}: #{$spacing * $i}#{'px !important'};
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include make-space($space-prefixes);
+
+@mixin oocssWidthPX($list...) {
+    @if (existed($list...)) {
+        @each $value in $list {
+            .s-w#{$value}px { width: $value + px; }
+        }
+    }
+  }
+  
+  @mixin oocssWidthPER($list...) {
+    @if (existed($list...)) {
+        @each $value in $list {
+            .s-w#{$value}per { width: $value + 0%; }
+        }
+    }
+  }
+  
+  @mixin oocssMarginPaddingPX($list...) {
+    @if (existed($list...)) {
+        @each $value in $list {
+            $cName : 00;
+            $tmp1 : floor($value);
+            $tmp2 : floor($value * 10) - ($tmp1 * 10);
+  
+            @if ($tmp2 > 0) {
+                $cName : $tmp1 + _ + $tmp2;
+            } @else {
+                $cName : $tmp1;
+            }
+  
+            /* #{$value} em */
+            .s-mg#{$cName}px { margin: $value + px; }
+            .s-mt#{$cName}px { margin-top: $value + px; }
+            .s-mr#{$cName}px { margin-right: $value + px; }
+            .s-mb#{$cName}px { margin-bottom: $value + px; }
+            .s-ml#{$cName}px { margin-left: $value + px; }
+            .s-pd#{$cName}px { padding: $value + px; }
+            .s-pt#{$cName}px { padding-top: $value + px; }
+            .s-pr#{$cName}px { padding-right: $value + px; }
+            .s-pb#{$cName}px { padding-bottom: $value + px; }
+            .s-pl#{$cName}px { padding-left: $value + px; }
+        }
+    }
+  }
+  
+  $screen-breakpoints: (
+    xs: '480px',
+    sm: '576px',
+    md: '768px',
+    lg: '1024px',
+    xl: '1280px',
+    sufxl: '1281px',
+    xxl: '1600px',
+    prexxxl: '1919px',
+    xxxl: '1920px',
+    xxxxl: '3000px',
+    // add more screen breakpoint here
+) !default;
+
+@mixin for-size($breakpoints) {
+
+    @if map-has-key($screen-breakpoints, $breakpoints) {
+
+    $breakpoint-value: map-get($screen-breakpoints, $breakpoints);
+
+    @media (min-width: $breakpoint-value) {
+        @content;
+    }
+    }
+}
+
+@mixin for-size-max($breakpoints) {
+
+    @if map-has-key($screen-breakpoints, $breakpoints) {
+
+    $breakpoint-value: map-get($screen-breakpoints, $breakpoints);
+
+    @media (max-width: $breakpoint-value) {
+        @content;
+    }
+    }
+}
+
+@mixin for-size-min($breakpoints) {
+
+    @if map-has-key($screen-breakpoints, $breakpoints) {
+
+    $breakpoint-value: map-get($screen-breakpoints, $breakpoints);
+
+    @media (min-width: $breakpoint-value) {
+        @content;
+    }
+    }
+}
+
+@mixin for-size-range($breakpointsfrom, $breakpointsto) {
+    @if map-has-key($screen-breakpoints, $breakpointsfrom) and map-has-key($screen-breakpoints, $breakpointsto) {
+    $breakpoint-value-from: map-get($screen-breakpoints, $breakpointsfrom);
+    $breakpoint-value-to: map-get($screen-breakpoints, $breakpointsto);
+
+    @media (max-width: $breakpoint-value-to) and (min-width: $breakpoint-value-from) {
+        @content;
+    }
+    }
+}
+
+// @include oocssWidthPX();
+//   @include oocssWidthPER(15,20,50);
+@include oocssMarginPaddingPX(4,10,52);

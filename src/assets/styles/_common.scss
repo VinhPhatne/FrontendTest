@@ -1,0 +1,23 @@
+.slick-prev,
+.slick-next {
+    background: #15cca3;
+    border-radius: 50%;
+    &:hover {
+        background: #15cca3;
+    }
+    &.slick-disabled {
+        background: gray;
+        border-radius: 50%;
+        cursor: not-allowed;
+    }
+}
+
+.slick-prev:before,
+.slick-next:before {
+    font-size: 0 !important;
+}
+
+.text-align {
+    text-align: justify;
+    word-spacing: 0.1em; /* Tùy chỉnh giá trị để kiểm soát khoảng cách */
+}

@@ -1,0 +1,71 @@
+@import '../../assets/styles/base';
+
+.appBody {
+    position: relative;
+    background: $defaultBackgroundColor;
+    min-width: $maxWidthScreen;
+    flex: 1 1;
+    .appBodyDesk {
+        display: flex;
+        flex-direction: row;
+        min-height: calc(100vh - 107px);
+        .appBodyWrap{
+            width: 100%;
+            margin-right: auto;
+            margin-left: auto;
+            .bodyComponent {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        
+            .customHeaderPaddingSmall {
+                // padding-top: 97.5px;
+                // margin-top: -20px;
+                padding-top: 127.5px;
+                margin-top: -52.5px;
+            }
+            .buttonMove {
+                padding-bottom: 30px;
+                margin-top: -73px;
+                text-align: right;
+                margin-right: 246px;
+                .buttonLeft, .buttonRight {
+                    height: 42px;
+                    width: 42px;
+                    @include for-size-max(xl) {
+                        height: 27.6px;
+                        width: 27.6px;
+                    }
+                    @include for-size-range(xl, xxxl) {
+                        height: 1.08rem;
+                        width: 1.08rem;
+                    }
+                    // background: #277CFB;
+                    // padding: 10px;
+                    color: white;
+                    // border-radius: 4px;
+                    // border: 3px solid #FFFFFF;
+                }
+                .buttonLeft {
+                    &:not(.disabled)
+                    {
+                        transform: rotate(180deg);
+                    }
+                }
+                .buttonRight {
+                    margin-left: 13px;
+                    @include for-size-max(xl) {
+                        margin-left: 8.54px;
+                    }
+                    @include for-size-range(xl, xxxl) {
+                        margin-left: 0.33rem;
+                    }
+                    &.disabled {
+                        transform: rotate(180deg);
+                    }
+                }
+        
+            }
+        }
+    }
+}

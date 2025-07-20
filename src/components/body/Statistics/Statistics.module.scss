@@ -1,0 +1,67 @@
+@import '../../../assets/styles/base';
+
+.topEnterprise {
+    height: unset;
+    background-color: $backgroundColor;
+    .topEnterpriseContainer {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        // border-radius: 8.75px;
+        align-items: center;
+        height: 120px;
+        gap: 50px;
+        background-size: cover;
+        padding: 20px;
+        border-radius: 36px;
+        max-width: 1400px;
+    }
+}
+
+.flex {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #0187da;
+    .number {
+        font-size: 72px;
+        font-weight: 600;
+    }
+    .text {
+        font-size: 24px;
+        font-weight: 600;
+        text-align: center;
+    }
+}
+
+.left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.footerButton {
+    background-color: #fff;
+    color: #025fca;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 24px;
+    font-size: 24px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.content {
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 32px;
+}

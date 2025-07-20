@@ -1,0 +1,25 @@
+@import '~slick-carousel/slick/slick.css';
+@import '~slick-carousel/slick/slick-theme.css';
+@import 'node_modules/react-modal-video/scss/modal-video.scss';
+// import 'slick-carousel/slick/slick.css'
+// import 'slick-carousel/slick/slick-theme.css'
+@import 'base';
+@import './quill.snow.css';
+
+@import '../../components/style.scss';
+
+@import '../../components/common/components/loading.scss';
+@import '../../components/common/entryForm/styles.scss';
+@import '../../components/footer/GetInTouch/GetInTouch.scss';
+@import '../../components/modal/BasicModal.scss';
+@import '../../components/header/AppHeader.scss';
+
+body {
+    &.bd-desktop {
+        font-size: 14px;
+    }
+
+    &.bd-mobile {
+        font-size: 14px;
+    }
+}

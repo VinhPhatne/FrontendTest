@@ -1,0 +1,417 @@
+/* Variables */
+$primary-blue: #0373f3; // A common blue, adjust if needed
+$dark-blue: #1d4ed8;
+$light-gray-bg: #f9fafb;
+$medium-gray-border: #e2e8f0;
+$dark-gray-text: #1c252e;
+$heading-color: #1c252e;
+$card-shadow: rgba(0, 0, 0, 0.08);
+$badge-bg: #f97316; // Orange for badge
+$price-color: #B71D18; // Red for price
+$old-price-color: #919EAB; // Gray for old price
+$sort-button-bg: #f1f5f9;
+$sort-button-hover: #e2e8f0;
+$filter-icon-color: #007bff; // Blue for filter icon
+$buy-button-bg: #e6f1ff;
+$buy-button-text: #025fca;
+.wrapper {
+    font-family: 'Epilogue';
+    display: flex;
+    gap: 20px;
+    padding: 32px 0px;
+    background: $light-gray-bg;
+    max-width: 1400px;
+    margin: 0px auto;
+    border-radius: 8px; // Added for overall wrapper
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 8px $card-shadow;
+    flex-shrink: 0;
+    height: fit-content;
+
+    .sidebarTitle {
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 32px;
+        margin-bottom: 16px;
+        color: #0373f3;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px solid $medium-gray-border;
+        padding-bottom: 12px;
+
+        .sidebarTitleIcon {
+            color: $filter-icon-color;
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    .filterGroup {
+        margin-bottom: 20px;
+        border-bottom: 1px solid $medium-gray-border;
+        padding-bottom: 16px;
+
+        &:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #0f172a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 0; // Added padding for click area
+
+            .filterToggleIcon {
+                width: 16px;
+                height: 16px;
+                color: $dark-gray-text;
+            }
+        }
+
+        .filterOptions {
+            padding-left: 4px; // Indent checkboxes
+        }
+
+        .checkboxLabel {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: $dark-gray-text;
+            cursor: pointer;
+
+            input[type='checkbox'] {
+                margin-right: 8px;
+                width: 16px;
+                height: 16px;
+                accent-color: $primary-blue; // Style checkbox color
+            }
+        }
+
+        .priceRangeButtons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            .priceRangeButton {
+                font-family: 'Epilogue';
+                background: $sort-button-bg;
+                border: 1px solid $medium-gray-border;
+                border-radius: 6px;
+                padding: 8px 12px;
+                font-size: 13px;
+                cursor: pointer;
+                transition: all 0.2s;
+                color: $dark-gray-text;
+                flex: 1 1 calc(100% - 4px); // Two buttons per row
+
+                &.active {
+                    color: $primary-blue;
+                    border-color: $primary-blue;
+                }
+
+                &:hover:not(.active) {
+                    background: $sort-button-hover;
+                    border-color: $sort-button-hover;
+                }
+            }
+        }
+    }
+}
+
+/* Product area */
+.productArea {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .headerRow {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        background: #fff;
+        padding: 12px 16px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: $heading-color;
+        }
+
+        .sortTabs {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+            .sortTitle {
+                font-size: 16px;
+                line-height: 26px;
+                color: $dark-gray-text;
+                line-height: 26px;
+                margin-right: 12px;
+            }
+            .sortButton {
+                position: relative;
+                background: $sort-button-bg;
+                border: none;
+                border-radius: 8px;
+                padding: 8px 16px;
+                font-size: 14px;
+                font-weight: 700;
+                line-height: 26px;
+                cursor: pointer;
+                transition: all 0.2s;
+                color: $dark-gray-text;
+
+                &.active {
+                    color: $primary-blue;
+                    border: 1px solid $primary-blue;
+                    &::after {
+                        content: '✓'; // dấu check
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        background: $primary-blue;
+                        color: #fff;
+                        font-size: 10px;
+                        font-weight: bold;
+                        width: 30px;
+                        height: 30px;
+                        clip-path: polygon(100% 0, 100% 100%, 0 0);
+                        display: flex;
+                        align-items: flex-start;
+                        justify-content: flex-end;
+                        padding-right: 3px;
+                        padding-bottom: 20px;
+                    }
+                }
+
+                &:hover:not(.active) {
+                    background: $sort-button-hover;
+                }
+            }
+        }
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background: #fff;
+        border-radius: 8px;
+        padding: 12px;
+        position: relative;
+        box-shadow: 0 2px 6px $card-shadow;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.2s ease-in-out;
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+
+        .imageWrap {
+            width: 100%;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+
+            img {
+                max-height: 100%;
+                object-fit: contain;
+                width: auto; // Ensure image scales correctly
+                height: auto;
+            }
+        }
+
+        .badge {
+            background: linear-gradient(to right, #ffd666 0%, #ffab00 100%);
+            color: #343a40;
+            padding: 2px 10px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Semibold';
+            line-height: 150%;
+            color: #7a0916;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            width: fit-content;
+            .badgeIcon {
+                width: 14px;
+                height: 14px;
+            }
+        }
+
+        .title {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 22px;
+            margin: 8px 0;
+            color: #0f172a;
+            height: 3em; // Limit to 2 lines
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .priceRow {
+            display: flex;
+            //align-items: baseline; // Align prices at baseline
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 8px;
+            flex-wrap: wrap; // Allow wrapping if space is tight
+            .subRow {
+                display: flex;
+                gap: 8px; /* khoảng cách giữa oldPrice và discount */
+            }
+            .price {
+                color: $price-color;
+                font-size: 16px;
+                font-weight: 700;
+            }
+
+            .oldPrice {
+                font-size: 12px;
+                color: $old-price-color;
+                text-decoration: line-through;
+            }
+
+            .discount {
+                font-size: 12px;
+                color: $price-color; // Use badge color for discount
+                font-weight: 600;
+            }
+        }
+
+        .buyBtn {
+            background: $buy-button-bg;
+            color: $buy-button-text;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 8px 16px;
+            transition: background 0.3s;
+        }
+    }
+
+    .noProducts {
+        grid-column: 1 / -1; // Span across all columns
+        text-align: center;
+        padding: 40px;
+        color: $dark-gray-text;
+        font-size: 16px;
+    }
+}
+
+.count {
+    font-family: 'BT Beau Sans';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #637381;
+    margin-left: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .wrapper {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .productArea .headerRow {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .productArea .headerRow h3 {
+        margin-bottom: 0;
+    }
+
+    .productArea .headerRow .sortTabs {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .productArea .grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 16px;
+    }
+
+    .sidebar .filterGroup .priceRangeButtons .priceRangeButton {
+        flex: 1 1 calc(100% - 6px); // Three buttons per row on smaller screens
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        padding: 10px;
+    }
+
+    .sidebar .filterGroup .priceRangeButtons .priceRangeButton {
+        flex: 1 1 calc(100% - 4px); // Two buttons per row on mobile
+    }
+
+    .productArea .grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+    }
+
+    .productArea .headerRow .sortTabs .sortButton {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+
+    .card .title {
+        font-size: 13px;
+    }
+    .card .price {
+        font-size: 14px;
+    }
+    .card .oldPrice,
+    .card .discount {
+        font-size: 11px;
+    }
+    .card .buyBtn {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+}

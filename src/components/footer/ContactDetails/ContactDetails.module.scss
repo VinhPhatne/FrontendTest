@@ -1,0 +1,172 @@
+.footer {
+    background: #ffffff;
+    padding: 96px 80px;
+    font-family: Lexend;
+}
+
+.footerMain {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px; // hoặc 20px nếu bạn muốn gần hơn nữa
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 30px;
+}
+
+.footerColumnLeft {
+    min-width: 600px;
+}
+
+.footerColumnRight {
+    min-width: 150px;
+}
+.footerColumnTitle {
+    font-size: 24px;
+    font-weight: 500;
+    color: #013065;
+    margin-bottom: 10px;
+}
+
+.footerColumnText {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #013065;
+}
+
+.footerColumnList {
+    list-style: none;
+    padding: 0;
+    li {
+        margin-bottom: 8px;
+    }
+}
+
+.footerColumnLink {
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: 400;
+    color: #637381;
+}
+
+.footerButton {
+    background-color: #0052cc;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zaloButton {
+    text-decoration: none;
+}
+
+.footerButtonArrow {
+    margin-left: 5px;
+}
+
+.footerBottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1290px;
+    margin: 0 auto;
+    padding-top: 20px;
+    font-size: 16px;
+    color: #757f8a;
+}
+
+.footerBottomLeft {
+    display: flex;
+    gap: 50px;
+}
+
+.footerBottomLanguage {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: -2px;
+}
+
+.footerBottomIcon {
+    font-size: 16px;
+}
+
+.footerBottomLink {
+    color: #757f8a;
+    text-decoration: none;
+}
+
+.footerBottomRight {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.footerBottomCopyright {
+    color: #757f8a;
+}
+
+.footerBottomSocial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.footerBottomSocialLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #757f8a;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.background {
+    position: absolute;
+    width: 800px;
+    height: 600px;
+    right: 0px;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.highlight {
+    color: #637381;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+}
+.firstLogo {
+    margin-top: 22px;
+}
+
+.textBlack {
+    font-family: 600;
+    font-size: 16px;
+    line-height: 28px;
+    color: #1c252e;
+}
+
+.headerLangSelector {
+    margin-top: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 8px;
+}
+
+.footerColumnLinkText {
+    color: #637381;
+    font-size: 16px;
+    line-height: 28px;
+    font-weight: 400;
+    text-decoration: none;
+}
