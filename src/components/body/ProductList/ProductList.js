@@ -17,7 +17,7 @@ import styles from "./ProductList.module.scss";
 const allProducts = [
     {
         id: 1,
-        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trail...",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 299000,
         oldPrice: 329000,
         discount: 10,
@@ -29,7 +29,7 @@ const allProducts = [
     },
     {
         id: 2,
-        name: "Lọc nhiên liệu Fuel Filter – Ford Ranger, Everest...",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 150000,
         oldPrice: 180000,
         discount: 15,
@@ -41,7 +41,7 @@ const allProducts = [
     },
     {
         id: 3,
-        name: "Bộ lọc dầu động cơ – Toyota Camry, Altis...",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 450000,
         oldPrice: 500000,
         discount: 10,
@@ -53,7 +53,7 @@ const allProducts = [
     },
     {
         id: 4,
-        name: "Lọc gió động cơ Air Filter – Honda Civic , CRV HRV (17220-5AA-A00)",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 80000,
         oldPrice: 90000,
         discount: 10,
@@ -65,7 +65,7 @@ const allProducts = [
     },
     {
         id: 5,
-        name: "Lọc nhiên liệu Fuel Filter – Mazda CX-5, Mazda 3 máy 2.0L",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 250000,
         oldPrice: 280000,
         discount: 10,
@@ -77,7 +77,7 @@ const allProducts = [
     },
     {
         id: 6,
-        name: "Bộ lọc dầu động cơ – Mercedes-Benz C-Class...",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 550000,
         oldPrice: 600000,
         discount: 8,
@@ -89,7 +89,7 @@ const allProducts = [
     },
     {
         id: 7,
-        name: "Bộ lọc dầu động cơ – Mercedes-Benz C-Class...",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 350000,
         oldPrice: 380000,
         discount: 8,
@@ -101,7 +101,7 @@ const allProducts = [
     },
     {
         id: 8,
-        name: "Lọc nhiên liệu Fuel Filter – Audi A4, A6...",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 120000,
         oldPrice: 140000,
         discount: 14,
@@ -113,7 +113,7 @@ const allProducts = [
     },
     {
         id: 9,
-        name: "Lọc nhiên liệu Fuel Filter – Mazda 3, CX-5...",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 250000,
         oldPrice: 280000,
         discount: 10,
@@ -125,7 +125,7 @@ const allProducts = [
     },
     {
         id: 10,
-        name: "Bộ lọc dầu động cơ – Mercedes-Benz C-Class...",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 550000,
         oldPrice: 600000,
         discount: 8,
@@ -137,7 +137,7 @@ const allProducts = [
     },
     {
         id: 11,
-        name: "Bộ lọc dầu động cơ – Mercedes-Benz C-Class...",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 350000,
         oldPrice: 380000,
         discount: 8,
@@ -149,7 +149,7 @@ const allProducts = [
     },
     {
         id: 12,
-        name: "Lọc nhiên liệu Fuel Filter – Audi A4, A6...",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 120000,
         oldPrice: 140000,
         discount: 14,
@@ -161,7 +161,7 @@ const allProducts = [
     },
     {
         id: 13,
-        name: "Lọc nhiên liệu Fuel Filter – Mazda 3, CX-5...",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 250000,
         oldPrice: 280000,
         discount: 10,
@@ -173,7 +173,7 @@ const allProducts = [
     },
     {
         id: 14,
-        name: "Bộ lọc dầu động cơ – Mercedes-Benz C-Class...",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 550000,
         oldPrice: 600000,
         discount: 8,
@@ -185,7 +185,7 @@ const allProducts = [
     },
     {
         id: 15,
-        name: "Bộ lọc dầu động cơ – Mercedes-Benz C-Class...",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 350000,
         oldPrice: 380000,
         discount: 8,
@@ -197,7 +197,7 @@ const allProducts = [
     },
     {
         id: 16,
-        name: "Lọc nhiên liệu Fuel Filter – Audi A4, A6...",
+        name: "Lọc gió động cơ Air Filter – Chevrolet Colorado, Trailblazer (52046262)",
         price: 120000,
         oldPrice: 140000,
         discount: 14,

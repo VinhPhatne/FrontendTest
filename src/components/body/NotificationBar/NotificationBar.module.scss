@@ -7,7 +7,6 @@
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    // border-radius: 8.75px;
     align-items: center;
     justify-content: space-around;
     height: 240px;
@@ -30,7 +29,7 @@
         display: flex;
         align-items: center;
         gap: 12px;
-        background: #fff;
+        background: $defaultBackgroundColor;
         border-radius: 8px;
         padding: 12px;
         box-shadow: 0px 8px 16px 0px rgba(145, 158, 171, 0.16);
@@ -50,7 +49,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #fff;
+            background: $defaultBackgroundColor;
             border-radius: 50%;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
@@ -63,7 +62,7 @@
             h4 {
                 margin: 0;
                 font-size: 16px;
-                color: #1c252e;
+                color: $heading-color;
                 font-weight: 700;
                 line-height: 120%;
             }
@@ -72,7 +71,7 @@
                 margin: 8px 0 0;
                 font-size: 14px;
                 font-weight: 500;
-                color: #637381;
+                color: $commonTextColor;
                 line-height: 150%;
             }
         }

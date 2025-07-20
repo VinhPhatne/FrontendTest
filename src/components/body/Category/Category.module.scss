@@ -1,48 +1,31 @@
 @import '../../../assets/styles/base';
 
-$primary-blue: #007bff;
-$dark-blue: #0056b3;
-$light-gray-bg: #f8f9fa;
-$medium-gray-border: #e9ecef;
-$dark-gray-text: #6c757d;
-$heading-color: #1c252e;
-$card-shadow: rgba(0, 0, 0, 0.1);
-$badge-bg: #f97316; // Orange for badge
-$price-color: #b71d18; // Darker red for prices
-$old-price-color: #94a3b8; // Gray for old price
-$buy-button-bg: #e6f1ff;
-$buy-button-text: #025fca;
-$sidebar-active-border: #007bff; // Blue border for active sidebar item
-$sidebar-item-hover-bg: #f0f2f5; // Light gray for sidebar item hover
-$product-badge-text: #1c252e;
 .dropdownContainer {
     position: absolute;
-    top: 100%; /* Position right below the header */
+    top: 100%;
     left: 0;
-    //width: 100%;
-    max-width: 1500px; /* Match header's max-width */
+    max-width: 1500px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #ffffff;
+    background-color: $defaultBackgroundColor;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Ensure it's above other content */
+    z-index: 1000;
     display: flex;
     border-radius: 8px;
-    overflow: hidden; /* Ensures shadow and border-radius are applied correctly */
-    padding: 16px; /* Inner padding for the whole dropdown */
-    box-sizing: border-box; /* Include padding in width calculation */
+    overflow: hidden;
+    padding: 16px;
+    box-sizing: border-box;
     padding-left: 0px;
 }
 
-/* Left Sidebar */
 .sidebar {
-    width: 280px; /* Fixed width for sidebar */
-    border-right: 1px solid $medium-gray-border;
+    width: 280px;
+    border-right: 1px solid $medium-gray;
     padding-right: 16px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 4px; /* Space between sidebar items */
+    gap: 4px;
 
     .sidebarItem {
         display: flex;
@@ -56,16 +39,16 @@ $product-badge-text: #1c252e;
         transition:
             background-color 0.2s ease-in-out,
             border-left-color 0.2s ease-in-out;
-        border-left: 4px solid transparent; /* Default transparent border */
+        border-left: 4px solid transparent;
 
         &:hover {
             background-color: $sidebar-item-hover-bg;
-            border-left-color: $sidebar-active-border; /* Blue border on hover */
+            border-left-color: $primary-blue;
         }
 
         &.active {
             background-color: $sidebar-item-hover-bg;
-            border-left-color: $sidebar-active-border; /* Blue border for active item */
+            border-left-color: $primary-blue;
             color: $primary-blue;
         }
 
@@ -83,12 +66,11 @@ $product-badge-text: #1c252e;
         .arrowIcon {
             width: 16px;
             height: 16px;
-            color: $dark-gray-text;
+            color: $dark-gray;
         }
     }
 }
 
-/* Right Content */
 .content {
     flex-grow: 1;
     padding-left: 20px;
@@ -97,13 +79,12 @@ $product-badge-text: #1c252e;
     gap: 20px;
 }
 
-/* Sub-categories Grid */
 .subCategoryGrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
-    padding-bottom: 20px; /* Space below grid */
-    border-bottom: 1px solid $medium-gray-border; /* Separator line */
+    padding-bottom: 20px;
+    border-bottom: 1px solid $medium-gray;
 
     .subCategoryCard {
         display: flex;
@@ -111,13 +92,13 @@ $product-badge-text: #1c252e;
         align-items: center;
         text-align: center;
         padding: 12px;
-        background-color: $light-gray-bg; /* Light background for sub-category cards */
+        background-color: $light-gray;
         border-radius: 8px;
         cursor: pointer;
         transition: background-color 0.2s ease-in-out;
 
         &:hover {
-            background-color: darken($light-gray-bg, 3%);
+            background-color: darken($light-gray, 3%);
         }
 
         .subCatImage {
@@ -135,7 +116,6 @@ $product-badge-text: #1c252e;
     }
 }
 
-/* Best-selling Products Section */
 .bestSellingSection {
     .bestSellingHeader {
         display: flex;
@@ -169,13 +149,12 @@ $product-badge-text: #1c252e;
         }
     }
 
-    /* Product Carousel (reusing styles from banner.module.scss where applicable) */
     .productCarouselContainer {
         position: relative;
         display: flex;
         align-items: center;
-        padding: 0 20px; /* Padding for arrows to overlap */
-        margin: 0 auto; /* Center the carousel */
+        padding: 0 20px;
+        margin: 0 auto;
     }
 
     .productCarousel {
@@ -197,11 +176,11 @@ $product-badge-text: #1c252e;
     .productCard {
         flex: 0 0 auto;
         width: 220px;
-        background-color: #ffffff;
+        background-color: $defaultBackgroundColor;
         border-radius: 8px;
         padding: 12px;
         position: relative;
-        box-shadow: 0 2px 6px $card-shadow;
+        box-shadow: 0 2px 6px $card-shadow-category;
         display: flex;
         flex-direction: column;
         transition: transform 0.2s ease-in-out;
@@ -265,7 +244,7 @@ $product-badge-text: #1c252e;
             font-size: 16px;
             font-weight: 700;
             line-height: 24px;
-            color: $price-color;
+            color: $red-flag;
             margin-bottom: 4px;
         }
 
@@ -285,7 +264,7 @@ $product-badge-text: #1c252e;
                 font-size: 12px;
                 font-weight: 400;
                 line-height: 24px;
-                color: $dark-gray-text;
+                color: $old-price-color;
                 text-decoration: line-through;
             }
 
@@ -298,7 +277,7 @@ $product-badge-text: #1c252e;
         }
 
         .buyNowButton {
-            background-color: $buy-button-bg;
+            background-color: $backgroundColor;
             color: $buy-button-text;
             padding: 8px 16px;
             border-radius: 8px;
@@ -312,7 +291,7 @@ $product-badge-text: #1c252e;
             box-sizing: border-box;
 
             &:hover {
-                background-color: darken($buy-button-bg, 5%);
+                background-color: darken($backgroundColor, 5%);
             }
         }
     }
@@ -342,24 +321,23 @@ $product-badge-text: #1c252e;
         .scrollIcon {
             width: 24px;
             height: 24px;
-            color: #025fca;
+            color: $buy-button-text;
         }
     }
 
     .scrollButtonLeft {
-        left: 0px; /* Adjusted to be inside the padding of productCarouselContainer */
+        left: 0px;
     }
 
     .scrollButtonRight {
-        right: 0px; /* Adjusted to be inside the padding of productCarouselContainer */
+        right: 0px;
     }
 }
 
-/* Responsive adjustments */
 @media (max-width: 1024px) {
     .dropdownContainer {
         flex-direction: column;
-        position: static; /* Remove absolute positioning on smaller screens */
+        position: static;
         box-shadow: none;
         border-radius: 0;
         padding: 10px;
@@ -368,28 +346,28 @@ $product-badge-text: #1c252e;
     .sidebar {
         width: 100%;
         border-right: none;
-        border-bottom: 1px solid $medium-gray-border;
+        border-bottom: 1px solid $medium-gray;
         padding-right: 0;
         padding-bottom: 10px;
         margin-bottom: 10px;
-        flex-direction: row; /* Make sidebar horizontal */
+        flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
         gap: 8px;
 
         .sidebarItem {
-            flex: 1 1 auto; /* Allow items to grow/shrink */
-            max-width: 180px; /* Limit width for horizontal layout */
+            flex: 1 1 auto;
+            max-width: 180px;
             justify-content: center;
-            border-left: none; /* Remove left border */
-            border: 1px solid $medium-gray-border; /* Add border for button-like appearance */
+            border-left: none;
+            border: 1px solid $medium-gray;
             &:hover,
             &.active {
                 border-left-color: transparent;
-                border-color: $sidebar-active-border;
+                border-color: $primary-blue;
             }
             .arrowIcon {
-                display: none; /* Hide arrow icon */
+                display: none;
             }
         }
     }
@@ -450,7 +428,7 @@ $product-badge-text: #1c252e;
 @media (max-width: 480px) {
     .sidebar {
         .sidebarItem {
-            max-width: 100%; /* Full width on very small screens */
+            max-width: 100%;
             justify-content: flex-start;
         }
     }
