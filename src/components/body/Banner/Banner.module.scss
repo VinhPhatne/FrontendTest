@@ -175,16 +175,16 @@
         }
 
         .productOldPrice {
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 400;
             line-height: 24px;
-            color: $dark-gray;
+            color: $old-price-color-product;
             text-decoration: line-through;
         }
 
         .productDiscount {
             font-size: 12px;
-            color: $badge-bg;
+            color: $red-flag;
             font-weight: 600;
             text-decoration: none;
         }
@@ -301,7 +301,7 @@
         font-size: 18px;
     }
     .productOldPrice {
-        font-size: 12px;
+        font-size: 14px;
     }
     .buyNowButton {
         font-size: 13px;
@@ -342,7 +342,7 @@
         font-size: 16px;
     }
     .productOldPrice {
-        font-size: 11px;
+        font-size: 12px;
     }
     .buyNowButton {
         font-size: 12px;

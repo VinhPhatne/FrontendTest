@@ -88,15 +88,12 @@ export default function Banner() {
 
     return (
         <section className={styles.bannerSection}>
-            {/* Top Banner */}
             <div className={styles.heroBanner}>
                 <img src={banner} alt="Tải App Nhận Quà" fill className={styles.heroBannerImage} priority />
             </div>
 
-            {/* Product Carousel */}
             <div className={styles.productCarouselContainer}>
                 <button className={styles.scrollButtonLeft} onClick={() => scroll("left")}>
-                    {/* <ChevronLeft className={styles.scrollIcon} /> */}
                     <img
                         alt=""
                         src={left}

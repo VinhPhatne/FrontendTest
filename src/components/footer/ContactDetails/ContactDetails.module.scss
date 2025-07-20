@@ -1,7 +1,7 @@
 @import '../../../assets/styles/base';
 
 .footer {
-    background: #ffffff;
+    background: $defaultBackgroundColor;
     padding: 96px 80px;
     font-family: Lexend;
 }
@@ -9,7 +9,7 @@
 .footerMain {
     display: flex;
     justify-content: space-between;
-    gap: 30px; // hoặc 20px nếu bạn muốn gần hơn nữa
+    gap: 30px;
     max-width: $widthScreen;
     margin: 0 auto;
     padding-bottom: 30px;
@@ -25,7 +25,7 @@
 .footerColumnTitle {
     font-size: 24px;
     font-weight: 500;
-    color: #013065;
+    color: $footer-title-color;
     margin-bottom: 10px;
 }
 
@@ -33,7 +33,7 @@
     font-size: 20px;
     line-height: 24px;
     font-weight: 600;
-    color: #013065;
+    color: $footer-title-color;
 }
 
 .footerColumnList {
@@ -48,12 +48,12 @@
     font-size: 20px;
     text-decoration: none;
     font-weight: 400;
-    color: #637381;
+    color: $commonTextColor;
 }
 
 .footerButton {
-    background-color: #0052cc;
-    color: #ffffff;
+    background-color: $footer-button-bg;
+    color: $titleTextColor;
     border: none;
     border-radius: 25px;
     padding: 10px 20px;
@@ -80,7 +80,7 @@
     margin: 0 auto;
     padding-top: 20px;
     font-size: 16px;
-    color: #757f8a;
+    color: $footer-text-color;
 }
 
 .footerBottomLeft {
@@ -100,7 +100,7 @@
 }
 
 .footerBottomLink {
-    color: #757f8a;
+    color: $footer-text-color;
     text-decoration: none;
 }
 
@@ -111,7 +111,7 @@
 }
 
 .footerBottomCopyright {
-    color: #757f8a;
+    color: $footer-text-color;
 }
 
 .footerBottomSocial {
@@ -125,7 +125,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #757f8a;
+    color: $footer-text-color;
     font-size: 16px;
     text-decoration: none;
 }
@@ -140,7 +140,7 @@
 }
 
 .highlight {
-    color: #637381;
+    color: $commonTextColor;
     font-size: 20px;
     font-weight: 600;
     line-height: 24px;
@@ -150,10 +150,10 @@
 }
 
 .textBlack {
-    font-family: 600;
+    font-weight: 600;
     font-size: 16px;
     line-height: 28px;
-    color: #1c252e;
+    color: $heading-color;
 }
 
 .headerLangSelector {
@@ -166,7 +166,7 @@
 }
 
 .footerColumnLinkText {
-    color: #637381;
+    color: $commonTextColor;
     font-size: 16px;
     line-height: 28px;
     font-weight: 400;

@@ -2,16 +2,13 @@
 
 .appHeaderContainer {
     background: radial-gradient(circle, #0d57c6 0%, #37cfff 50%, #0f5ed6 100%);
-
     position: relative;
 }
 .appHeader {
     width: 100%;
-    //padding: 4px 0px;
     overflow: hidden;
 
     .headerContainer {
-        //display: flex;
         width: 100%;
         padding: 4px 0px;
     }
@@ -29,7 +26,7 @@
     padding: 4px 0px;
     font-size: 12px;
     line-height: 16px;
-    color: #f3f2f2;
+    color: $header-top-text;
     font-weight: 700;
     .left {
         display: flex;
@@ -49,27 +46,17 @@
     }
 }
 
-$primary-blue: #0155c6;
-$dark-blue: #0056b3;
-$light-gray: #f8f9fa;
-$medium-gray: #e9ecef;
-$dark-gray: #6c757d;
-$text-color: #343a40;
-$orange-badge: #ff5630;
-$red-flag: #dc3545;
-
 .header {
     width: 100%;
-    background-color: #fff;
+    background-color: $defaultBackgroundColor;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     margin-top: 24px;
-    /* Top Row */
     .headerTop {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 96px; // Approx 24 units * 4px/unit
-        max-width: $widthScreen; // container mx-auto
+        height: 96px;
+        max-width: $widthScreen;
         margin-left: auto;
         margin-right: auto;
 
@@ -91,16 +78,17 @@ $red-flag: #dc3545;
             height: 64px;
             .headerSearchInput {
                 width: 100%;
-                border-radius: 9999px; // rounded-full
-                border: 1px solid #60a5fa; // border-blue-400
-                padding: 0.5rem 3rem 0.5rem 1rem; // pl-4 pr-12 py-2
+                border-radius: 9999px;
+                border: 1px solid $search-border;
+                padding: 0.5rem 3rem 0.5rem 1rem;
+                color: $old-price-color-product;
                 outline: none;
                 font-size: 16px;
                 font-weight: 400;
                 line-height: 24px;
                 &:focus {
-                    border-color: $primary-blue; // focus:ring-blue-500 focus:border-blue-500
-                    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+                    border-color: $primary-blue-header;
+                    box-shadow: 0 0 0 3px $search-focus-shadow;
                 }
             }
 
@@ -116,15 +104,15 @@ $red-flag: #dc3545;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                color: $dark-gray; // text-gray-500
+                color: $dark-gray;
 
                 &:hover {
-                    background: transparent; // hover:bg-transparent
+                    background: transparent;
                 }
             }
 
             .headerCameraButton {
-                right: 3.5rem; // right-14
+                right: 3.5rem;
             }
 
             .headerSearchButton {
@@ -132,12 +120,12 @@ $red-flag: #dc3545;
                 height: 100%;
                 border-top-right-radius: 9999px;
                 border-bottom-right-radius: 9999px;
-                background-color: $primary-blue; // bg-blue-600
-                color: #fff;
-                padding: 0 1rem; // px-4
+                background-color: $primary-blue-header;
+                color: $defaultBackgroundColor;
+                padding: 0 1rem;
 
                 &:hover {
-                    background-color: $dark-blue; // hover:bg-blue-700
+                    background-color: $dark-blue;
                 }
             }
         }
@@ -145,27 +133,25 @@ $red-flag: #dc3545;
         .headerRightIcons {
             display: flex;
             align-items: center;
-            gap: 1.5rem; // space-x-6
-            font-size: 0.875rem; // text-sm
-            color: $text-color; // text-gray-700
+            gap: 1.5rem;
+            font-size: 0.875rem;
+            color: $hot-badge-text;
 
             .headerLangSelector {
                 display: flex;
                 align-items: center;
-                gap: 0.25rem; // space-x-1
+                gap: 0.25rem;
             }
 
             .headerCartWrapper {
-                position: relative; /* Needed for cart dropdown positioning */
-                display: flex; /* To make the whole area clickable/hoverable */
+                position: relative;
+                display: flex;
                 align-items: center;
                 gap: 4px;
-                padding: 8px 12px; /* Padding to make it look like a button */
-                border-radius: 9999px; /* Rounded shape */
-                //background-color: #e0f2fe; /* Light blue background */
+                padding: 8px 12px;
+                border-radius: 9999px;
                 cursor: pointer;
                 transition: background-color 0.2s ease-in-out;
-                
 
                 .headerCart {
                     display: flex;
@@ -175,7 +161,7 @@ $red-flag: #dc3545;
                     .headerIcon {
                         height: 24px;
                         width: 24px;
-                        color: $primary-blue;
+                        color: $primary-blue-header;
                     }
 
                     .headerCartBadge {
@@ -190,7 +176,7 @@ $red-flag: #dc3545;
                         border-radius: 9999px;
                         background-color: $orange-badge;
                         font-size: 12px;
-                        color: #fff;
+                        color: $defaultBackgroundColor;
                     }
                 }
             }
@@ -198,15 +184,14 @@ $red-flag: #dc3545;
             .headerAccount {
                 display: flex;
                 align-items: center;
-                gap: 0.25rem; // space-x-1
+                gap: 0.25rem;
             }
         }
     }
 
-    /* Middle Row (Navigation) */
     .headerMiddle {
-        background-color: $light-gray; // bg-gray-100
-        padding-top: 24px; // py-3
+        background-color: $light-gray;
+        padding-top: 24px;
         padding-bottom: 24px;
 
         .headerMiddleContent {
@@ -219,14 +204,14 @@ $red-flag: #dc3545;
         }
 
         .categoryButtonWrapper {
-            position: relative; /* For dropdown positioning */
+            position: relative;
         }
 
         .headerCategoryButton {
-            background-color: $primary-blue; // bg-blue-600
-            color: #fff;
+            background-color: $primary-blue-header;
+            color: $defaultBackgroundColor;
             &:hover {
-                background-color: $dark-blue; // hover:bg-blue-700
+                background-color: $dark-blue;
             }
             span {
                 margin-left: 8px;
@@ -234,25 +219,24 @@ $red-flag: #dc3545;
             font-size: 16px;
             line-height: 20px;
             font-weight: 700;
-            padding: 12px 16px; // px-6 py-2
-            border-radius: 8px; // rounded-md
+            padding: 12px 16px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: 8x; // space-x-2
+            gap: 8x;
             border: none;
             width: 263px;
             cursor: pointer;
 
             .headerIconSmall {
-                margin-left: 4px; // ml-2
-                color: #fff;
+                margin-left: 4px;
+                color: $defaultBackgroundColor;
             }
         }
 
         .headerNav {
-            display: none; // hidden
+            display: none;
             @media (min-width: 768px) {
-                // md:flex
                 display: flex;
             }
             align-items: center;
@@ -263,59 +247,60 @@ $red-flag: #dc3545;
                 font-size: 16px;
                 font-weight: 500;
                 line-height: 24px;
-                color: #1c252e;
+                color: $heading-color;
                 &:hover {
-                    color: $primary-blue;
+                    color: $primary-blue-header;
                 }
             }
         }
 
         .headerServices {
-            display: none; // hidden
+            display: none;
             @media (min-width: 1024px) {
                 display: flex;
             }
             align-items: center;
-            gap: 20px; // space-x-6
-            color: $text-color; // text-gray-700
-            font-size: 0.875rem; // text-sm
+            gap: 20px;
+            color: $hot-badge-text;
+            font-size: 0.875rem;
 
             .headerServiceItem {
                 display: flex;
                 align-items: center;
-                gap: 8px; // space-x-1
+                gap: 8px;
             }
         }
     }
 
-    /* Bottom Row (Breadcrumbs) */
     .headerBottom {
-        background-color: #f9fafb; // bg-gray-50
+        background-color: $light-gray-bg;
         padding-bottom: 32px;
 
         .headerBottomContent {
-            max-width: $widthScreen; // container mx-auto
+            max-width: $widthScreen;
             margin-left: auto;
             margin-right: auto;
-            font-size: 0.875rem; // text-sm
-            color: $dark-gray; // text-gray-500
+            font-size: 0.875rem;
+            color: $dark-gray;
         }
 
         .headerBreadcrumbLink {
+            font-weight: 400;
+            font-size: 14px;
             text-decoration: none;
-            color: inherit;
+            color: $old-price-color-product;
             &:hover {
-                color: $primary-blue; // hover:text-blue-600
+                color: $primary-blue-header;
             }
         }
 
         .headerBreadcrumbSeparator {
-            margin: 0 0.5rem; // mx-2
+            margin: 0 0.5rem;
         }
 
         .headerBreadcrumbLinkActive {
-            font-weight: 500; // font-medium
-            color: $primary-blue; // text-blue-600
+            font-weight: 500;
+            color: $headerBreadcrumbLink;
             text-decoration: none;
         }
     }
@@ -325,20 +310,23 @@ $red-flag: #dc3545;
     font-size: 16px;
     font-weight: 500;
     line-height: 16px;
+    color: $heading-color;
 }
 
 .categoryText {
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
+    color: $heading-color;
 }
 
 .textService {
     font-size: 16px;
     font-weight: 500;
     line-height: 150%;
+    color: $heading-color;
 }
 
 .highlight {
-    color: #faca4a;
+    color: $highlight-yellow;
 }
