@@ -26,12 +26,12 @@ const CustomerRoute = () => {
 
   return (
       <div>
-        {!isNotFound && <Header />}
+        {/* {!isNotFound && <Header />} */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-        {!isNotFound && <Footer />}
+        {/* {!isNotFound && <Footer />} */}
       </div>
   );
 };
