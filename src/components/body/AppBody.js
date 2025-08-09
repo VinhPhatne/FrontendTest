@@ -33,20 +33,6 @@ function AppBody() {
     const [ loading, setLoading ] = useState(false);
 
     const displayComponent = [
-        // <CategoryCourse
-        //     key={1}
-        //     courses={[ ...courses ]}
-        //     NavigatorMenu={NavigatorMenu}
-        //     subject={subject}
-        //     setLoading={setLoading}
-        // />,
-        // <Review key={5} data={outstanding} NavigatorMenu={NavigatorMenu} />,
-        // <JoinUsColection
-        //     key={6}
-        //     setShowDetailModal={setShowDetailModal}
-        //     NavigatorMenu={NavigatorMenu}
-        //     zaloLink={zaloLink}
-        // />,
         <Banner
             key={5}
         />,

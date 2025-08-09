@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState, useRef } from "react"
 import {
   HomeIcon,
   InfoIcon,
@@ -14,7 +14,11 @@ import {
   Github,
   Linkedin,
   ArrowUp,
+  Server,
+  Wrench,
+  Code,
 } from "lucide-react"
+import { motion, useInView } from "framer-motion"
 
 // helper: smooth scroll with offset for sticky nav
 function smoothScrollTo(id) {
@@ -25,7 +29,34 @@ function smoothScrollTo(id) {
   window.scrollTo({ top: y, behavior: "smooth" })
 }
 
-// Floating top pill navigation with scrollspy
+/* Animated wrapper that reveals when in view (reference: user's AppBody motion.div pattern) */
+function AnimatedInView({ children, variant = "up", delay = 0, duration = 0.7, className = "" }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, amount: 0.2 })
+
+  const variants = {
+    up: { initial: { opacity: 0, y: 50 }, animate: { opacity: 1, y: 0 } },
+    left: { initial: { opacity: 0, x: -50 }, animate: { opacity: 1, x: 0 } },
+    right: { initial: { opacity: 0, x: 50 }, animate: { opacity: 1, x: 0 } },
+    zoom: { initial: { opacity: 0, scale: 0.95 }, animate: { opacity: 1, scale: 1 } },
+  }
+  const v = variants[variant] || variants.up
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={v.initial}
+      animate={isInView ? v.animate : v.initial}
+      transition={{ duration, delay, ease: [0.22, 0.61, 0.36, 1] }}
+      style={{ width: "100%" }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+/* ---------- Floating top pill navigation with scrollspy ---------- */
 function TopNav() {
   const NAV_ITEMS = useMemo(
     () => [
@@ -92,112 +123,168 @@ function TopNav() {
   )
 }
 
-// Hero (English + social links + typing effect badge)
+/* ---------- Typewriter with delete-and-type loop ---------- */
+function useTypewriterLoop(text, { typeSpeed = 90, deleteSpeed = 60, pause = 900 } = {}) {
+  const [output, setOutput] = useState("")
+  const [isTyping, setIsTyping] = useState(true)
+  const indexRef = useRef(0)
+  const timeoutRef = useRef(null)
+
+  useEffect(() => {
+    function tick() {
+      if (isTyping) {
+        const next = text.slice(0, indexRef.current + 1)
+        setOutput(next)
+        indexRef.current++
+        if (next.length === text.length) {
+          setIsTyping(false)
+          timeoutRef.current = setTimeout(tick, pause)
+          return
+        }
+        timeoutRef.current = setTimeout(tick, typeSpeed)
+      } else {
+        const next = text.slice(0, indexRef.current - 1)
+        setOutput(next)
+        indexRef.current--
+        if (indexRef.current === 0) {
+          setIsTyping(true)
+          timeoutRef.current = setTimeout(tick, pause / 2)
+          return
+        }
+        timeoutRef.current = setTimeout(tick, deleteSpeed)
+      }
+    }
+    tick()
+    return () => clearTimeout(timeoutRef.current)
+  }, [text, typeSpeed, deleteSpeed, pause])
+
+  return output
+}
+
+/* ---------- Hero (7/3 split, image smaller on the right) ---------- */
 function Hero() {
+  const typed = useTypewriterLoop("Frontend Developer")
+
   return (
-    <section id="home" className="pt-28 pb-16 sm:pt-32 sm:pb-20 scroll-mt-24" aria-label="Introduction">
-      {/* typing effect styles */}
+    <section id="home" className="pt-28 pb-16 sm:pt-32 sm:pb-20 scroll-mt-24">
+      {/* caret blink style for the typing badge */}
       <style>{`
-        .typewriter {
-          display: inline-block;
-          overflow: hidden;
+        .typing-caret {
           border-right: 2px solid #111;
           white-space: nowrap;
-          animation: typing 2.8s steps(18, end) 0.2s both, blink 1s step-end infinite;
+          overflow: hidden;
+          animation: caret-blink 1s step-end infinite;
         }
-        @keyframes typing { from { width: 0 } to { width: 18ch } }
-        @keyframes blink { 50% { border-color: transparent } }
+        @keyframes caret-blink { 50% { border-color: transparent } }
       `}</style>
 
-      <div className="text-center max-w-3xl mx-auto px-4">
-        <div className="mx-auto inline-flex items-center rounded-full bg-gray-100 px-3 py-1">
-          <span className="typewriter text-gray-800 text-sm font-medium">Frontend Developer</span>
-        </div>
+      <div className="max-w-6xl mx-auto grid items-center gap-8 px-4 md:grid-cols-10">
+        {/* Text 7/10 */}
+        <AnimatedInView variant="up" className="md:col-span-7">
+          
 
-        <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">{"Hi, I'm Nguyen Vinh Phat"}</h1>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
-          {
-            "Web developer focused on ReactJS/Redux, clean UI with Ant Design and Tailwind CSS, and solid CI/CD practices."
-          }
-        </p>
+          <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">{"Hi, I'm Nguyen Vinh Phat"}</h1>
 
-        <div className="mt-3 flex items-center justify-center gap-3 text-sm text-gray-500">
-          <span>{"Ho Chi Minh City"}</span>
-          <span>{"•"}</span>
-          <a href="mailto:nguyenvinhphat123@gmail.com" className="hover:text-gray-700">
-            {"nguyenvinhphat123@gmail.com"}
-          </a>
-          <span>{"•"}</span>
-          <a href="tel:0886815356" className="hover:text-gray-700">
-            {"0886 815 356"}
-          </a>
-        </div>
+          <div className="inline-flex items-center rounded-full mt-3 py-2">
+            <span className="typing-caret text-gray-800 text-xl font-medium">{typed}</span>
+          </div>
 
-        {/* Only here: LinkedIn & GitHub */}
-        <div className="mt-5 flex items-center justify-center gap-3">
-          <a
-            href="https://www.linkedin.com/in/ngvinhphat/"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-gray-300 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 transition-colors"
-            aria-label="LinkedIn"
-          >
-            <Linkedin className="h-4 w-4" />
-            LinkedIn
-          </a>
-          <a
-            href="https://github.com/VinhPhatne"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-black transition-colors"
-            aria-label="GitHub"
-          >
-            <Github className="h-4 w-4" />
-            GitHub
-          </a>
-        </div>
+          <p className="mt-4 max-w-xl text-lg text-gray-600">
+            {
+              "Web developer focused on ReactJS/Redux, clean UI with Ant Design and Tailwind CSS, and solid CI/CD practices."
+            }
+          </p>
 
-        <div className="mt-6 flex items-center justify-center gap-3">
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault()
-              smoothScrollTo("contact")
-            }}
-            className="rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white hover:bg-black transition-colors"
-          >
-            Contact me
-          </a>
-          <a
-            href="#projects"
-            onClick={(e) => {
-              e.preventDefault()
-              smoothScrollTo("projects")
-            }}
-            className="rounded-full border border-gray-300 px-5 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 transition-colors"
-          >
-            View projects
-          </a>
-        </div>
+          <div className="mt-5 flex items-center gap-3">
+            <a
+              href="https://www.linkedin.com/in/ngvinhphat/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-gray-300 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 transition-colors"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-4 w-4" />
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/VinhPhatne"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-black transition-colors"
+              aria-label="GitHub"
+            >
+              <Github className="h-4 w-4" />
+              GitHub
+            </a>
+          </div>
+
+          {/* <div className="mt-6 flex items-center gap-3">
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault()
+                smoothScrollTo("contact")
+              }}
+              className="rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white hover:bg-black transition-colors"
+            >
+              Contact me
+            </a>
+            <a
+              href="#projects"
+              onClick={(e) => {
+                e.preventDefault()
+                smoothScrollTo("projects")
+              }}
+              className="rounded-full border border-gray-300 px-5 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 transition-colors"
+            >
+              View projects
+            </a>
+          </div> */}
+        </AnimatedInView>
+
+        {/* Image 3/10 */}
+        <AnimatedInView variant="left" className="md:col-span-3">
+          <img
+            src="https://placehold.co/520x380/png?text=Frontend+Developer"
+            alt="Hero illustration"
+            className="w-full rounded-2xl border border-gray-200 shadow-sm object-cover md:h-[320px]"
+          />
+        </AnimatedInView>
       </div>
     </section>
   )
 }
 
-// About (light theme, replace certificates with a portrait image like the reference site)
+/* ---------- About (7/3 split, image on the LEFT) ---------- */
 function About() {
   return (
     <section id="about" className="py-16 scroll-mt-24 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">About Me</h2>
-        <div className="grid md:grid-cols-2 gap-10 items-start">
-          <div>
+        <AnimatedInView variant="zoom">
+          <h2 className="text-3xl font-bold text-center mb-8">About Me</h2>
+        </AnimatedInView>
+
+        <div className="grid md:grid-cols-10 gap-10 items-start">
+          {/* Image 3/10 on the left */}
+          <AnimatedInView variant="right" className="md:col-span-3">
+            <div className="rounded-xl bg-white p-3 ring-1 ring-gray-200">
+              <img
+                src="https://placehold.co/560x520/png?text=Your+Photo"
+                alt="Portrait of Nguyen Vinh Phat"
+                className="h-[320px] sm:h-[360px] md:h-[420px] w-full rounded-lg object-cover"
+              />
+            </div>
+          </AnimatedInView>
+
+          {/* Text 7/10 */}
+          <AnimatedInView variant="up" className="md:col-span-7">
             <p className="text-xl mb-4 text-gray-800">Profile</p>
             <p className="text-gray-700 leading-relaxed">
               {
                 "As a web development student, my goal is to become a professional Frontend Engineer. I enjoy building clean, accessible, and performant interfaces, and continuously improve through real-world projects."
               }
             </p>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6 text-sm">
               <div className="rounded-lg bg-white p-4 ring-1 ring-gray-200">
                 <strong className="text-gray-900">Name:</strong> Nguyen Vinh Phat
@@ -223,29 +310,20 @@ function About() {
               <h3 className="text-xl font-semibold">Interests & Focus</h3>
               <div className="mt-2 flex flex-wrap gap-2">
                 {["Frontend Development", "ReactJS / Redux", "UI/UX & Ant Design", "Tailwind CSS"].map((t) => (
-                  <span key={t} className="rounded-full bg-blue-100 px-3 py-1 text-blue-800 text-xs sm:text-sm">
+                  <span key={t} className="rounded-full bg-gray-100 px-3 py-1 text-gray-700 font-medium text-xs sm:text-sm">
                     {t}
                   </span>
                 ))}
               </div>
             </div>
-          </div>
-
-          {/* Portrait image card (replace certificates) */}
-          <div className="rounded-xl bg-white p-3 ring-1 ring-gray-200">
-            <img
-              src="https://placehold.co/560x520/png?text=Your+Photo"
-              alt="Portrait of Nguyen Vinh Phat"
-              className="h-[320px] sm:h-[360px] md:h-[420px] w-full rounded-lg object-cover"
-            />
-          </div>
+          </AnimatedInView>
         </div>
       </div>
     </section>
   )
 }
 
-// Experience with Tabs (Work Experience / Education). Achievements omitted per request.
+/* ---------- Experience with Tabs (Work / Education) ---------- */
 function Experience() {
   const [tab, setTab] = useState("work")
 
@@ -307,10 +385,12 @@ function Experience() {
   return (
     <section id="experience" className="py-16 scroll-mt-24">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-6">Experience</h2>
+        <AnimatedInView variant="zoom">
+          <h2 className="text-3xl font-bold text-center mb-6">Experience</h2>
+        </AnimatedInView>
 
-        {/* Tabs like reference site */}
-        <div className="mb-8 flex justify-center">
+        {/* Tabs */}
+        <AnimatedInView variant="up" className="mb-8 flex justify-center">
           <div className="inline-flex items-center gap-1 rounded-full bg-gray-100 p-1 shadow-inner">
             <button
               onClick={() => setTab("work")}
@@ -335,58 +415,59 @@ function Experience() {
               <span>Education</span>
             </button>
           </div>
-        </div>
+        </AnimatedInView>
 
-        {/* Timeline list (dark left rail + dots like screenshot) */}
-        <div className="border-l-[4px] border-gray-800 pl-5 space-y-6">
+        {/* Timeline list */}
+        <AnimatedInView variant="left" className="border-l-[4px] border-gray-800 pl-5 space-y-6">
           {items.map((item, idx) => (
             <div key={idx} className="relative">
-              {/* Dot */}
               <span className="absolute -left-7 top-0 h-3 w-3 rounded-full bg-gray-900 ring-4 ring-white" />
-              <article className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
-                <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-semibold">{item.title}</h3>
-                    <p className="text-blue-600">{item.org}</p>
-                  </div>
-                  <div className="text-sm text-gray-500 flex flex-wrap items-center gap-x-4 gap-y-1">
-                    <span className="inline-flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      {item.period}
-                    </span>
-                    <span className="inline-flex items-center gap-1">
-                      <MapPin className="h-4 w-4" />
-                      {item.location}
-                    </span>
-                  </div>
-                </div>
-                <p className="mt-3 text-gray-800">{item.description}</p>
-                {item.bullets && item.bullets.length > 0 && (
-                  <ul className="mt-3 list-disc pl-5 text-sm text-gray-800 space-y-1">
-                    {item.bullets.map((b, bi) => (
-                      <li key={bi}>{b}</li>
-                    ))}
-                  </ul>
-                )}
-                {item.tech && item.tech.length > 0 && (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {item.tech.map((t) => (
-                      <span key={t} className="rounded-full bg-gray-900/90 px-3 py-1 text-xs text-white">
-                        {t}
+              <AnimatedInView variant="up" delay={idx * 0.08}>
+                <article className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-semibold">{item.title}</h3>
+                      <p className="text-blue-600">{item.org}</p>
+                    </div>
+                    <div className="text-sm text-gray-500 flex flex-wrap items-center gap-x-4 gap-y-1">
+                      <span className="inline-flex items-center gap-1">
+                        <Calendar className="h-4 w-4" />
+                        {item.period}
                       </span>
-                    ))}
+                      <span className="inline-flex items-center gap-1">
+                        <MapPin className="h-4 w-4" />
+                        {item.location}
+                      </span>
+                    </div>
                   </div>
-                )}
-              </article>
+                  <p className="mt-3 text-gray-800">{item.description}</p>
+                  {item.bullets?.length > 0 && (
+                    <ul className="mt-3 list-disc pl-5 text-sm text-gray-800 space-y-1">
+                      {item.bullets.map((b, bi) => (
+                        <li key={bi}>{b}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {item.tech?.length > 0 && (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {item.tech.map((t) => (
+                        <span key={t} className="rounded-full bg-gray-900/90 px-3 py-1 text-xs text-white">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </article>
+              </AnimatedInView>
             </div>
           ))}
-        </div>
+        </AnimatedInView>
       </div>
     </section>
   )
 }
 
-// Projects
+/* ---------- Projects ---------- */
 function Projects() {
   const projects = [
     {
@@ -405,42 +486,46 @@ function Projects() {
   return (
     <section id="projects" className="py-16 scroll-mt-24">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">Projects</h2>
+        <AnimatedInView variant="zoom">
+          <h2 className="text-3xl font-bold text-center mb-8">Projects</h2>
+        </AnimatedInView>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, i) => (
-            <article key={i} className="rounded-xl bg-gray-50 p-6 shadow-sm ring-1 ring-gray-200">
-              <h3 className="text-xl font-semibold">{project.title}</h3>
-              <p className="text-blue-600">{project.type}</p>
-              <p className="text-sm text-gray-500">
-                {project.status} {" | "} {project.period}
-              </p>
-              <p className="mt-3 text-gray-800">{project.description}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {project.skills.map((s) => (
-                  <span key={s} className="rounded-full bg-blue-100 px-3 py-1 text-blue-800 text-xs">
-                    {s}
-                  </span>
-                ))}
-              </div>
-              <div className="mt-5 flex gap-3">
-                <a
-                  href={project.repo}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full border border-gray-300 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 transition-colors"
-                >
-                  GitHub
-                </a>
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-black transition-colors"
-                >
-                  Live Demo
-                </a>
-              </div>
-            </article>
+            <AnimatedInView key={i} variant="zoom" delay={i * 0.08}>
+              <article className="rounded-xl bg-gray-50 p-6 shadow-sm ring-1 ring-gray-200">
+                <h3 className="text-xl font-semibold">{project.title}</h3>
+                <p className="text-blue-600">{project.type}</p>
+                <p className="text-sm text-gray-500">
+                  {project.status}
+                </p>
+                <p className="mt-3 text-gray-800">{project.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.skills.map((s) => (
+                    <span key={s} className="rounded-full bg-gray-100 px-3 py-1 text-gray-700 font-medium text-xs">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-5 flex gap-3">
+                  <a
+                    href={project.repo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-full border border-gray-300 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 transition-colors"
+                  >
+                    GitHub
+                  </a>
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-full bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-black transition-colors"
+                  >
+                    Live Demo
+                  </a>
+                </div>
+              </article>
+            </AnimatedInView>
           ))}
         </div>
       </div>
@@ -448,38 +533,68 @@ function Projects() {
   )
 }
 
-// Skills
+/* ---------- Skills with Tabs (no % bars, framed cards like screenshot) ---------- */
 function Skills() {
-  const skills = [
-    { name: "ReactJS", level: 90 },
-    { name: "Redux", level: 85 },
-    { name: "HTML / CSS / SCSS", level: 88 },
-    { name: "Tailwind CSS", level: 86 },
-    { name: "Ant Design", level: 82 },
-    { name: "Java / Spring Boot (Basic)", level: 60 },
-    { name: "MySQL", level: 72 },
-    { name: "MongoDB", level: 72 },
-    { name: "Git / SourceTree", level: 85 },
-    { name: "GitHub Actions", level: 62 },
-    { name: "GitLab CI/CD", level: 62 },
-    { name: "Docker", level: 60 },
+  const TABS = [
+    { id: "programming", label: "Programming", icon: Code2 },
+    { id: "frontend", label: "Frontend", icon: Code },
+    { id: "backend", label: "Backend", icon: Server },
+    { id: "tools", label: "Tools", icon: Wrench },
   ]
+
+  const SKILLS = {
+    programming: ["JavaScript", "Java"],
+    frontend: ["ReactJS", "Redux", "HTML", "CSS", "SCSS", "Tailwind CSS", "Ant Design"],
+    backend: ["Spring Boot", "MySQL"],
+    tools: ["Git", "SourceTree", "GitHub Actions", "GitLab CI/CD", "Docker"],
+  }
+
+  const [tab, setTab] = useState("programming")
+  const items = SKILLS[tab] || []
 
   return (
     <section id="skills" className="py-16 scroll-mt-24 bg-gray-50">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <h2 className="text-3xl font-bold text-center mb-8">Technical Skills</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {skills.map((s, i) => (
-            <div key={i} className="space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <span>{s.name}</span>
-                <span className="text-blue-600">{s.level}%</span>
+      <div className="max-w-6xl mx-auto px-4">
+        <AnimatedInView variant="zoom">
+          <h2 className="text-3xl font-bold text-center mb-6">Technical Skills</h2>
+        </AnimatedInView>
+
+        {/* Tabs bar (pill style like Experience) */}
+        <AnimatedInView variant="up" className="mb-8 flex justify-center">
+          <div className="inline-flex items-center gap-1 rounded-full bg-gray-100 p-1 shadow-inner">
+            {TABS.map(({ id, label, icon: Icon }) => {
+              const active = tab === id
+              return (
+                <button
+                  key={id}
+                  onClick={() => setTab(id)}
+                  className={[
+                    "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm transition-colors",
+                    active ? "bg-gray-900 text-white" : "text-gray-700 hover:bg-gray-200",
+                  ].join(" ")}
+                  aria-pressed={active}
+                >
+                  <Icon className="h-4 w-4" />
+                  <span>{label}</span>
+                </button>
+              )
+            })}
+          </div>
+        </AnimatedInView>
+
+        {/* Framed cards grid (no percentage bars) */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((skill, i) => (
+            <AnimatedInView key={skill} variant="up" delay={i * 0.06}>
+              <div className="rounded-xl bg-white p-5 ring-1 ring-gray-200 shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900">{skill}</h3>
+                </div>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700">Skill</span>
+                </div>
               </div>
-              <div className="h-2.5 w-full rounded-full bg-gray-200">
-                <div className="h-2.5 rounded-full bg-gray-700" style={{ width: `${s.level}%` }} />
-              </div>
-            </div>
+            </AnimatedInView>
           ))}
         </div>
       </div>
@@ -487,79 +602,85 @@ function Skills() {
   )
 }
 
-// Contact
+/* ---------- Contact ---------- */
 function Contact() {
   return (
     <section id="contact" className="py-16 scroll-mt-24 bg-gray-50">
       <div className="max-w-xl mx-auto px-4 sm:px-6">
-        <h2 className="text-3xl font-bold text-center mb-8">Get In Touch</h2>
-        <p className="text-center text-gray-600 mb-8">
-          {"Leave me a message — I'll get back to you as soon as possible."}
-        </p>
+        <AnimatedInView variant="zoom">
+          <h2 className="text-3xl font-bold text-center mb-8">Get In Touch</h2>
+        </AnimatedInView>
+        <AnimatedInView variant="up">
+          <p className="text-center text-gray-600 mb-8">
+            {"Leave me a message — I'll get back to you as soon as possible."}
+          </p>
+        </AnimatedInView>
 
-        <div className="rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-              alert("Thanks! Your message has been sent.")
-            }}
-            className="space-y-4"
-          >
-            <div className="grid gap-2">
-              <label htmlFor="name" className="text-sm font-medium">
-                Name
-              </label>
-              <input
-                id="name"
-                placeholder="Your name"
-                required
-                className="h-10 rounded-md border px-3 outline-none focus:ring-2 focus:ring-gray-900"
-              />
-            </div>
-            <div className="grid gap-2">
-              <label htmlFor="email" className="text-sm font-medium">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                placeholder="Your email"
-                required
-                className="h-10 rounded-md border px-3 outline-none focus:ring-2 focus:ring-gray-900"
-              />
-            </div>
-            <div className="grid gap-2">
-              <label htmlFor="message" className="text-sm font-medium">
-                Message
-              </label>
-              <textarea
-                id="message"
-                rows={4}
-                placeholder="Your message"
-                required
-                className="rounded-md border p-3 outline-none focus:ring-2 focus:ring-gray-900"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full h-10 rounded-md bg-gray-900 text-white hover:bg-black transition-colors"
+        <AnimatedInView variant="right">
+          <div className="rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-200">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                alert("Thanks! Your message has been sent.")
+              }}
+              className="space-y-4"
             >
-              Send Message
-            </button>
-          </form>
-          <div className="mt-6 text-center text-sm text-gray-600">
-            Or email me directly:{" "}
-            <a className="underline hover:text-gray-800" href="mailto:nguyenvinhphat123@gmail.com">
-              nguyenvinhphat123@gmail.com
-            </a>
+              <div className="grid gap-2">
+                <label htmlFor="name" className="text-sm font-medium">
+                  Name
+                </label>
+                <input
+                  id="name"
+                  placeholder="Your name"
+                  required
+                  className="h-10 rounded-md border px-3 outline-none focus:ring-2 focus:ring-gray-900"
+                />
+              </div>
+              <div className="grid gap-2">
+                <label htmlFor="email" className="text-sm font-medium">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="Your email"
+                  required
+                  className="h-10 rounded-md border px-3 outline-none focus:ring-2 focus:ring-gray-900"
+                />
+              </div>
+              <div className="grid gap-2">
+                <label htmlFor="message" className="text-sm font-medium">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  rows={4}
+                  placeholder="Your message"
+                  required
+                  className="rounded-md border p-3 outline-none focus:ring-2 focus:ring-gray-900"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full h-10 rounded-md bg-gray-900 text-white hover:bg-black transition-colors"
+              >
+                Send Message
+              </button>
+            </form>
+            <div className="mt-6 text-center text-sm text-gray-600">
+              Or email me directly:{" "}
+              <a className="underline hover:text-gray-800" href="mailto:nguyenvinhphat123@gmail.com">
+                nguyenvinhphat123@gmail.com
+              </a>
+            </div>
           </div>
-        </div>
+        </AnimatedInView>
       </div>
     </section>
   )
 }
 
-// Floating "scroll to top" button
+/* ---------- Floating "scroll to top" button ---------- */
 function ScrollToTopButton() {
   const [show, setShow] = useState(false)
   useEffect(() => {
@@ -580,14 +701,14 @@ function ScrollToTopButton() {
   )
 }
 
+/* ---------- Home (global smooth anchors) ---------- */
 const Home = () => {
   // Global smooth scrolling for any in-page anchor links (fallback)
   useEffect(() => {
     const handler = (e) => {
       const a = e.target.closest('a[href^="#"]')
       if (!a) return
-      const hash = a.getAttribute("href") || ""
-      const id = hash.replace("#", "")
+      const id = (a.getAttribute("href") || "").replace("#", "")
       if (id) {
         e.preventDefault()
         smoothScrollTo(id)
@@ -611,7 +732,6 @@ const Home = () => {
       <footer className="py-10 text-center text-sm text-gray-500">
         {"© "} {new Date().getFullYear()} {"Nguyen Vinh Phat. All rights reserved."}
       </footer>
-
       <ScrollToTopButton />
     </div>
   )
